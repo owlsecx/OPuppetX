@@ -18,19 +18,18 @@
 
 ## 📌 Overview
 
-Puppet Server / CA / PuppetDB / Hiera / manifest security-hardening auditor
+OPuppetX is an offline, read-only configuration-hardening auditor for Puppet. It parses puppet.conf, autosign and auth.conf, Hiera/eyaml, manifests and Puppetfiles, and flags weaknesses in certificate authority, autosigning, TLS and secret handling. Secrets are masked and findings map to CWE and MITRE references.
 
 ---
 
 ## ✨ Features
 
-- Stdlib INI / HOCON / YAML / Puppet DSL / Puppetfile parsers
-- puppet.conf CA, CRL, autosign, agent & report settings
-- autosign.conf globs + policy executables, CA SAN / authz extensions correlated with broad autosigning
-- auth.conf rules, puppetserver / webserver TLS, PuppetDB
-- Hiera / eyaml secrets & key perms, manifests (.pp) exec / file / password / source checks, r10k & Puppetfile pins
-- SSL dir key permissions; secrets masked everywhere
-- Export TXT / MD / JSON / CSV / SARIF; --demo, --fail-on
+- Stdlib parsers for INI, HOCON, YAML, Puppet DSL and Puppetfile
+- puppet.conf CA/CRL/autosign and agent/report settings analysis
+- autosign.conf glob and policy-executable review correlated with CA SANs
+- auth.conf, puppetserver/webserver TLS and PuppetDB checks
+- Hiera/eyaml secret and key-permission checks plus manifest (.pp) exec/file/password review
+- r10k/Puppetfile pin checks with TXT/MD/JSON/CSV/SARIF export and CI gates
 
 ---
 
@@ -44,7 +43,10 @@ Puppet Server / CA / PuppetDB / Hiera / manifest security-hardening auditor
 ## 🚀 Usage
 
 ```bash
-./OPuppetX
+./OPuppetX -p /etc/puppetlabs/puppet/puppet.conf
+./OPuppetX --scan --root /mnt/collected --sarif -o report.sarif
+./OPuppetX -p ./puppet --fail-on high
+./OPuppetX --help
 ```
 
 ---
